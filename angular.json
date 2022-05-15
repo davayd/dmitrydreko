@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/nx/schemas/workspace-schema.json",
+  "version": 2,
+  "projects": {
+    "dmitrydreko-cv": "apps/dmitrydreko-cv",
+    "dmitrydreko-cv-e2e": "apps/dmitrydreko-cv-e2e"
+  }
+}
