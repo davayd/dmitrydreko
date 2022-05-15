@@ -5,9 +5,11 @@
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
-        "outputPath": "dist/apps/dmitrydreko-cv",
+        "outputPath": "dist/dmitrydreko-cv/browser",
         "index": "apps/dmitrydreko-cv/src/index.html",
         "main": "apps/dmitrydreko-cv/src/main.ts",
         "polyfills": "apps/dmitrydreko-cv/src/polyfills.ts",
@@ -17,7 +19,9 @@
           "apps/dmitrydreko-cv/src/favicon.ico",
           "apps/dmitrydreko-cv/src/assets"
         ],
-        "styles": ["apps/dmitrydreko-cv/src/styles.scss"],
+        "styles": [
+          "apps/dmitrydreko-cv/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -82,11 +86,72 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/dmitrydreko-cv"],
+      "outputs": [
+        "coverage/apps/dmitrydreko-cv"
+      ],
       "options": {
         "jestConfig": "apps/dmitrydreko-cv/jest.config.ts",
         "passWithNoTests": true
       }
+    },
+    "server": {
+      "executor": "@angular-devkit/build-angular:server",
+      "options": {
+        "outputPath": "dist/dmitrydreko-cv/server",
+        "main": "apps/dmitrydreko-cv/server.ts",
+        "tsConfig": "apps/dmitrydreko-cv/tsconfig.server.json",
+        "inlineStyleLanguage": "scss"
+      },
+      "configurations": {
+        "production": {
+          "outputHashing": "media",
+          "fileReplacements": [
+            {
+              "replace": "apps/dmitrydreko-cv/src/environments/environment.ts",
+              "with": "apps/dmitrydreko-cv/src/environments/environment.prod.ts"
+            }
+          ]
+        },
+        "development": {
+          "optimization": false,
+          "sourceMap": true,
+          "extractLicenses": false
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve-ssr": {
+      "executor": "@nguniversal/builders:ssr-dev-server",
+      "configurations": {
+        "development": {
+          "browserTarget": "dmitrydreko-cv:build:development",
+          "serverTarget": "dmitrydreko-cv:server:development"
+        },
+        "production": {
+          "browserTarget": "dmitrydreko-cv:build:production",
+          "serverTarget": "dmitrydreko-cv:server:production"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "prerender": {
+      "executor": "@nguniversal/builders:prerender",
+      "options": {
+        "routes": [
+          "/"
+        ]
+      },
+      "configurations": {
+        "production": {
+          "browserTarget": "dmitrydreko-cv:build:production",
+          "serverTarget": "dmitrydreko-cv:server:production"
+        },
+        "development": {
+          "browserTarget": "dmitrydreko-cv:build:development",
+          "serverTarget": "dmitrydreko-cv:server:development"
+        }
+      },
+      "defaultConfiguration": "production"
     }
   },
   "tags": []

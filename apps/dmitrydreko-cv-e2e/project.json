@@ -17,12 +17,18 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/dmitrydreko-cv-e2e/**/*.{js,ts}"]
+        "lintFilePatterns": [
+          "apps/dmitrydreko-cv-e2e/**/*.{js,ts}"
+        ]
       }
     }
   },
   "tags": [],
-  "implicitDependencies": ["dmitrydreko-cv"]
+  "implicitDependencies": [
+    "dmitrydreko-cv"
+  ]
 }
